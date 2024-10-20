@@ -1,0 +1,55 @@
+dev:
+  region: "cn-beijing"
+  vpc_name: "project-vpc-dev"
+  vpc_cidr: ["172.16.0.0/16"]
+  ecs_instance_type: "ecs.t5-lc2m1.nano"
+  ecs_count: 2
+  subnets:
+    - cidr: "172.16.1.0/24"
+      zone: "cn-beijing-a"
+    - cidr: "172.16.2.0/24"
+      zone: "cn-beijing-b"
+  security_groups:
+    web:
+      description: "Allow HTTP and HTTPS"
+      rules:
+        - port: 80
+          protocol: "tcp"
+          cidr: "0.0.0.0/0"
+        - port: 443
+          protocol: "tcp"
+          cidr: "0.0.0.0/0"
+    db:
+      description: "Allow MySQL"
+      rules:
+        - port: 3306
+          protocol: "tcp"
+          cidr: "10.0.0.0/16"
+
+prod:
+  region: "cn-shanghai"
+  vpc_name: "project-vpc-prod"
+  vpc_cidr: "10.0.0.0/16"
+  ecs_instance_type: "ecs.g6.large"
+  ecs_count: 4
+  subnets:
+    - cidr: "10.0.1.0/24"
+      zone: "cn-shanghai-a"
+    - cidr: "10.0.2.0/24"
+      zone: "cn-shanghai-b"
+  security_groups:
+    web:
+      description: "Allow HTTP and HTTPS"
+      rules:
+        - port: 80
+          protocol: "tcp"
+          cidr: "0.0.0.0/0"
+        - port: 443
+          protocol: "tcp"
+          cidr: "0.0.0.0/0"
+    db:
+      description: "Allow MySQL"
+      rules:
+        - port: 3306
+          protocol: "tcp"
+          cidr: "10.0.0.0/16"
